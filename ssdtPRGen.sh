@@ -159,7 +159,7 @@ let gIsLegacyRevoBoot=0
 let gExtraStyling=1
 
 #
-# Global variable used by some functions to return a value to the callee. 
+# Global variable used by some functions to return a value to the callee.
 #
 let gFunctionReturn=0
 
@@ -555,7 +555,7 @@ function _printProcessorDefinitions()
 
     echo '    }'                                                                      >> "$gSsdtPR"
     #
-    # 
+    #
     #
     if [[ $scopeIndex -lt ${#gScope[@]} ]];
       then
@@ -5122,33 +5122,7 @@ function main()
         fi
     fi
   fi
-  #
-  # Ask for confirmation before opening the new SSDT.dsl?
-  #
-  if [[ $gCallOpen -eq 2 && -f "$gSsdtPR" ]];
-    then
-      #
-      # Yes. Ask for confirmation.
-      #
-      read -p "Do you want to open ${gSsdtID}.dsl (y/n)? " openAnswer
-      case "$openAnswer" in
-          y|Y ) #
-                # Ok. Override default behaviour.
-                #
-                let gCallOpen=1
-          ;;
-      esac
-  fi
-  #
-  # Should we open the new SSDT.dsl?
-  #
-  if [[ $gCallOpen -eq 1 ]];
-    then
-      #
-      # Yes. Open SSDT.dsl in TextEdit.
-      #
       open -e "$gSsdtPR"
-  fi
 }
 
 #==================================== START =====================================
