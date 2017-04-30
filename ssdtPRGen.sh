@@ -5126,7 +5126,6 @@ function main()
   # Changed to simply Open the file
   #
       open -e "$gSsdtPR"
-  fi
 }
 
 #==================================== START =====================================
