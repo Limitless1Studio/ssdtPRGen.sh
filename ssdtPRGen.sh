@@ -159,7 +159,7 @@ let gIsLegacyRevoBoot=0
 let gExtraStyling=1
 
 #
-# Global variable used by some functions to return a value to the callee.
+# Global variable used by some functions to return a value to the callee. 
 #
 let gFunctionReturn=0
 
@@ -226,7 +226,7 @@ gRevision='0x000'${gScriptVersion:0:2}${gScriptVersion:3:1}'00'
 # Path and filename setup.
 #
 gHome=$(echo $HOME)
-gPath="${gHome}/Desktop/ssdtPRGen"
+gPath="${gHome}/Library/ssdtPRGen"
 gDataPath="${gPath}/Data"
 gToolPath="${gPath}/Tools"
 gSsdtID="ssdt"
@@ -555,7 +555,7 @@ function _printProcessorDefinitions()
 
     echo '    }'                                                                      >> "$gSsdtPR"
     #
-    #
+    # 
     #
     if [[ $scopeIndex -lt ${#gScope[@]} ]];
       then
@@ -5123,9 +5123,32 @@ function main()
     fi
   fi
   #
-  # Changed to simply Open the file
+  # Ask for confirmation before opening the new SSDT.dsl?
   #
+  if [[ $gCallOpen -eq 2 && -f "$gSsdtPR" ]];
+    then
+      #
+      # Yes. Ask for confirmation.
+      #
+      read -p "Do you want to open ${gSsdtID}.dsl (y/n)? " openAnswer
+      case "$openAnswer" in
+          y|Y ) #
+                # Ok. Override default behaviour.
+                #
+                let gCallOpen=1
+          ;;
+      esac
+  fi
+  #
+  # Should we open the new SSDT.dsl?
+  #
+  if [[ $gCallOpen -eq 1 ]];
+    then
+      #
+      # Yes. Open SSDT.dsl in TextEdit.
+      #
       open -e "$gSsdtPR"
+  fi
 }
 
 #==================================== START =====================================
